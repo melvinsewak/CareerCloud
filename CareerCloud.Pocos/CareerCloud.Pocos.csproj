@@ -64,5 +64,8 @@
     <Compile Include="SystemCountryCodePoco.cs" />
     <Compile Include="SystemLanguageCodePoco.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="CareerCloud.UnitTests.Assignment1.csproj" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
