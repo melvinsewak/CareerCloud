@@ -3,6 +3,7 @@ using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
@@ -97,7 +98,8 @@ namespace CareerCloud.ADODataAccessLayer
 
         public CompanyProfilePoco GetSingle(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<CompanyProfilePoco> pocos = GetAll().AsQueryable();
+            return pocos.Where(where).FirstOrDefault();
         }
 
         public void Remove(params CompanyProfilePoco[] items)
