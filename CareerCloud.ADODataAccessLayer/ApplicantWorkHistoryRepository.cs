@@ -69,7 +69,51 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<ApplicantWorkHistoryPoco> GetAll(params Expression<Func<ApplicantWorkHistoryPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<ApplicantWorkHistoryPoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Applicant]
+                                              ,[Company_Name]
+                                              ,[Country_Code]
+                                              ,[Location]
+                                              ,[Job_Title]
+                                              ,[Job_Description]
+                                              ,[Start_Month]
+                                              ,[Start_Year]
+                                              ,[End_Month]
+                                              ,[End_Year]
+                                              ,[Time_Stamp]
+                                          FROM [dbo].[Applicant_Work_History]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new ApplicantWorkHistoryPoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Applicant = (Guid)sqlDataReader[1];
+                    poco.CompanyName = (string)sqlDataReader[2];
+                    poco.CountryCode = (string)sqlDataReader[3];
+                    poco.Location = (string)sqlDataReader[4];
+                    poco.JobTitle = (string)sqlDataReader[5];
+                    poco.JobDescription = (string)sqlDataReader[6];
+                    poco.StartMonth = (short)sqlDataReader[7];
+                    poco.StartYear = (int)sqlDataReader[8];
+                    poco.EndMonth = (short)sqlDataReader[9];
+                    poco.EndYear = (int)sqlDataReader[10];
+                    poco.TimeStamp = (byte[])sqlDataReader[11];
+
+                    result.Add(poco);
+                }
+
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<ApplicantWorkHistoryPoco> GetList(Expression<Func<ApplicantWorkHistoryPoco, bool>> where, params Expression<Func<ApplicantWorkHistoryPoco, object>>[] navigationProperties)

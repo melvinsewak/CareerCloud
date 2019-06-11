@@ -45,7 +45,32 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<SystemLanguageCodePoco> GetAll(params Expression<Func<SystemLanguageCodePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<SystemLanguageCodePoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [LanguageID]
+                                            ,[Name]
+                                            ,[Native_Name]
+                                        FROM [dbo].[System_Language_Codes]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new SystemLanguageCodePoco();
+                    poco.LanguageID = (string)sqlDataReader[0];
+                    poco.Name = (string)sqlDataReader[1];
+                    poco.NativeName = (string)sqlDataReader[2];
+
+                    result.Add(poco);
+                }
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<SystemLanguageCodePoco> GetList(Expression<Func<SystemLanguageCodePoco, bool>> where, params Expression<Func<SystemLanguageCodePoco, object>>[] navigationProperties)

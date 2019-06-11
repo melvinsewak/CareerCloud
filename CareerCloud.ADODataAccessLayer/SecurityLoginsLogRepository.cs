@@ -51,7 +51,36 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<SecurityLoginsLogPoco> GetAll(params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<SecurityLoginsLogPoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Login]
+                                              ,[Source_IP]
+                                              ,[Logon_Date]
+                                              ,[Is_Succesful]
+                                          FROM [dbo].[Security_Logins_Log]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new SecurityLoginsLogPoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Login = (Guid)sqlDataReader[1];
+                    poco.SourceIP = (string)sqlDataReader[2];
+                    poco.LogonDate = (DateTime)sqlDataReader[3];
+                    poco.IsSuccesful = (bool)sqlDataReader[4];
+
+                    result.Add(poco);
+                }
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<SecurityLoginsLogPoco> GetList(Expression<Func<SecurityLoginsLogPoco, bool>> where, params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)

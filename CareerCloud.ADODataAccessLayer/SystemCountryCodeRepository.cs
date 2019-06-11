@@ -42,7 +42,30 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<SystemCountryCodePoco> GetAll(params Expression<Func<SystemCountryCodePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<SystemCountryCodePoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Code]
+                                            ,[Name]
+                                        FROM [dbo].[System_Country_Codes]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new SystemCountryCodePoco();
+                    poco.Code = (string)sqlDataReader[0];
+                    poco.Name = (string)sqlDataReader[1];
+
+                    result.Add(poco);
+                }
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<SystemCountryCodePoco> GetList(Expression<Func<SystemCountryCodePoco, bool>> where, params Expression<Func<SystemCountryCodePoco, object>>[] navigationProperties)

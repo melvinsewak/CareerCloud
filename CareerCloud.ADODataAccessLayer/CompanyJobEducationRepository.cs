@@ -48,7 +48,37 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<CompanyJobEducationPoco> GetAll(params Expression<Func<CompanyJobEducationPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<CompanyJobEducationPoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Job]
+                                              ,[Major]
+                                              ,[Importance]
+                                              ,[Time_Stamp]
+                                          FROM [dbo].[Company_Job_Educations]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new CompanyJobEducationPoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Job = (Guid)sqlDataReader[1];
+                    poco.Major = (string)sqlDataReader[2];
+                    poco.Importance = (short)sqlDataReader[3];
+                    poco.TimeStamp = (byte[])sqlDataReader[4];
+
+                    result.Add(poco);
+                }
+
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<CompanyJobEducationPoco> GetList(Expression<Func<CompanyJobEducationPoco, bool>> where, params Expression<Func<CompanyJobEducationPoco, object>>[] navigationProperties)

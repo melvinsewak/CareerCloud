@@ -59,7 +59,40 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<CompanyProfilePoco> GetList(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<CompanyProfilePoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Registration_Date]
+                                              ,[Company_Website]
+                                              ,[Contact_Phone]
+                                              ,[Contact_Name]
+                                              ,[Company_Logo]
+                                              ,[Time_Stamp]
+                                          FROM [dbo].[Company_Profiles]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new CompanyProfilePoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.RegistrationDate = (DateTime)sqlDataReader[1];
+                    poco.CompanyWebsite = (string)sqlDataReader[2];
+                    poco.ContactPhone = (string)sqlDataReader[3];
+                    poco.ContactName = (string)sqlDataReader[4];
+                    poco.CompanyLogo = (byte[])sqlDataReader[5];
+                    poco.TimeStamp = (byte[])sqlDataReader[6];
+
+                    result.Add(poco);
+                }
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public CompanyProfilePoco GetSingle(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)

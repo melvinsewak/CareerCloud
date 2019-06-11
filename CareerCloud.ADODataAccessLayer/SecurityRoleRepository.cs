@@ -45,7 +45,32 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<SecurityRolePoco> GetAll(params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<SecurityRolePoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Role]
+                                              ,[Is_Inactive]
+                                          FROM [dbo].[Security_Roles]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new SecurityRolePoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Role = (string)sqlDataReader[1];
+                    poco.IsInactive = (bool)sqlDataReader[2];
+
+                    result.Add(poco);
+                }
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<SecurityRolePoco> GetList(Expression<Func<SecurityRolePoco, bool>> where, params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)

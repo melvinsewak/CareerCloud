@@ -60,7 +60,43 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<ApplicantEducationPoco> GetAll(params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<ApplicantEducationPoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Applicant]
+                                              ,[Major]
+                                              ,[Certificate_Diploma]
+                                              ,[Start_Date]
+                                              ,[Completion_Date]
+                                              ,[Completion_Percent]
+                                              ,[Time_Stamp]
+                                          FROM [dbo].[Applicant_Educations]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader= sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new ApplicantEducationPoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Applicant = (Guid)sqlDataReader[1];
+                    poco.Major = (string)sqlDataReader[2];
+                    poco.CertificateDiploma = (string)sqlDataReader[3];
+                    poco.StartDate = (DateTime?)sqlDataReader[4];
+                    poco.CompletionDate = (DateTime?)sqlDataReader[5];
+                    poco.CompletionPercent = (byte?)sqlDataReader[6];
+                    poco.TimeStamp = (byte[])sqlDataReader[7];
+
+                    result.Add(poco);
+                }
+
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<ApplicantEducationPoco> GetList(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)

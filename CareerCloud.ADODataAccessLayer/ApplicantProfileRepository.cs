@@ -66,7 +66,49 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<ApplicantProfilePoco> GetAll(params Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<ApplicantProfilePoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Login]
+                                              ,[Current_Salary]
+                                              ,[Current_Rate]
+                                              ,[Currency]
+                                              ,[Country_Code]
+                                              ,[State_Province_Code]
+                                              ,[Street_Address]
+                                              ,[City_Town]
+                                              ,[Zip_Postal_Code]
+                                              ,[Time_Stamp]
+                                          FROM [dbo].[Applicant_Profiles]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new ApplicantProfilePoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Login = (Guid)sqlDataReader[1];
+                    poco.CurrentSalary = (decimal?)sqlDataReader[2];
+                    poco.CurrentRate = (decimal?)sqlDataReader[3];
+                    poco.Currency = (string)sqlDataReader[4];
+                    poco.Country = (string)sqlDataReader[5];
+                    poco.Province = (string)sqlDataReader[6];
+                    poco.Street = (string)sqlDataReader[7];
+                    poco.City = (string)sqlDataReader[8];
+                    poco.PostalCode = (string)sqlDataReader[9];
+                    poco.TimeStamp = (byte[])sqlDataReader[10];
+
+                    result.Add(poco);
+                }
+
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<ApplicantProfilePoco> GetList(Expression<Func<ApplicantProfilePoco, bool>> where, params Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)

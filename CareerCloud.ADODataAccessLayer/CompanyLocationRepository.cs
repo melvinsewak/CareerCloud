@@ -57,7 +57,42 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<CompanyLocationPoco> GetAll(params Expression<Func<CompanyLocationPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            var result = new List<CompanyLocationPoco>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.CommandText = @"SELECT [Id]
+                                              ,[Company]
+                                              ,[Country_Code]
+                                              ,[State_Province_Code]
+                                              ,[Street_Address]
+                                              ,[City_Town]
+                                              ,[Zip_Postal_Code]
+                                              ,[Time_Stamp]
+                                          FROM [dbo].[Company_Locations]";
+                sqlCommand.Connection = sqlConnection;
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    var poco = new CompanyLocationPoco();
+                    poco.Id = (Guid)sqlDataReader[0];
+                    poco.Company = (Guid)sqlDataReader[1];
+                    poco.CountryCode = (string)sqlDataReader[2];
+                    poco.Province = (string)sqlDataReader[3];
+                    poco.Street = (string)sqlDataReader[4];
+                    poco.City = (string)sqlDataReader[5];
+                    poco.PostalCode = (string)sqlDataReader[6];
+                    poco.TimeStamp = (byte[])sqlDataReader[7];
+
+                    result.Add(poco);
+                }
+                sqlConnection.Close();
+            }
+            return result;
         }
 
         public IList<CompanyLocationPoco> GetList(Expression<Func<CompanyLocationPoco, bool>> where, params Expression<Func<CompanyLocationPoco, object>>[] navigationProperties)
