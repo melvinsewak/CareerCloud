@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
@@ -10,7 +11,37 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params SecurityLoginsLogPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand();
+                    sqlCommand.CommandText = @"INSERT INTO [dbo].[Security_Logins_Log]
+                                                   ([Id]
+                                                   ,[Login]
+                                                   ,[Source_IP]
+                                                   ,[Logon_Date]
+                                                   ,[Is_Succesful])
+                                             VALUES
+                                                   (@Id
+                                                   ,@Login
+                                                   ,@Source_IP
+                                                   ,@Logon_Date
+                                                   ,@Is_Succesful)";
+                    sqlCommand.Connection = sqlConnection;
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
+                    sqlCommand.Parameters.AddWithValue("@Source_IP", poco.SourceIP);
+                    sqlCommand.Parameters.AddWithValue("@Logon_Date", poco.LogonDate);
+                    sqlCommand.Parameters.AddWithValue("@Is_Succesful", poco.IsSuccesful);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)

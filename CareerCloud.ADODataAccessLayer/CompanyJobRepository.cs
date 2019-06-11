@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
@@ -10,7 +11,37 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params CompanyJobPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand();
+                    sqlCommand.CommandText = @"INSERT INTO [dbo].[Company_Jobs]
+                                                   ([Id]
+                                                   ,[Company]
+                                                   ,[Profile_Created]
+                                                   ,[Is_Inactive]
+                                                   ,[Is_Company_Hidden])
+                                             VALUES
+                                                   (@Id
+                                                   ,@Company
+                                                   ,@Profile_Created
+                                                   ,@Is_Inactive
+                                                   ,@Is_Company_Hidden)";
+                    sqlCommand.Connection = sqlConnection;
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Company", poco.Company);
+                    sqlCommand.Parameters.AddWithValue("@Profile_Created", poco.ProfileCreated);
+                    sqlCommand.Parameters.AddWithValue("@Is_Inactive", poco.IsInactive);
+                    sqlCommand.Parameters.AddWithValue("@Is_Company_Hidden", poco.IsCompanyHidden);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)

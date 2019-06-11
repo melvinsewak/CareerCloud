@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
@@ -10,7 +11,43 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params CompanyLocationPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand();
+                    sqlCommand.CommandText = @"INSERT INTO [dbo].[Company_Locations]
+                                                   ([Id]
+                                                   ,[Company]
+                                                   ,[Country_Code]
+                                                   ,[State_Province_Code]
+                                                   ,[Street_Address]
+                                                   ,[City_Town]
+                                                   ,[Zip_Postal_Code])
+                                             VALUES
+                                                   (@Id
+                                                   ,@Company
+                                                   ,@Country_Code
+                                                   ,@State_Province_Code
+                                                   ,@Street_Address
+                                                   ,@City_Town
+                                                   ,@Zip_Postal_Code)";
+                    sqlCommand.Connection = sqlConnection;
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Company", poco.Company);
+                    sqlCommand.Parameters.AddWithValue("@Country_Code", poco.CountryCode);
+                    sqlCommand.Parameters.AddWithValue("@State_Province_Code", poco.Province);
+                    sqlCommand.Parameters.AddWithValue("@Street_Address", poco.Street);
+                    sqlCommand.Parameters.AddWithValue("@City_Town", poco.City);
+                    sqlCommand.Parameters.AddWithValue("@Zip_Postal_Code", poco.PostalCode);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)

@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
@@ -10,7 +11,34 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params CompanyJobEducationPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand();
+                    sqlCommand.CommandText = @"INSERT INTO [dbo].[Company_Job_Educations]
+                                                   ([Id]
+                                                   ,[Job]
+                                                   ,[Major]
+                                                   ,[Importance])
+                                             VALUES
+                                                   (@Id
+                                                   ,@Job
+                                                   ,@Major
+                                                   ,@Importance)";
+                    sqlCommand.Connection = sqlConnection;
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Job", poco.Job);
+                    sqlCommand.Parameters.AddWithValue("@Major", poco.Major);
+                    sqlCommand.Parameters.AddWithValue("@Importance", poco.Importance);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)

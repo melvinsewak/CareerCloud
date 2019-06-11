@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
@@ -10,7 +11,40 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params CompanyProfilePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand();
+                    sqlCommand.CommandText = @"INSERT INTO [dbo].[Company_Profiles]
+                                                   ([Id]
+                                                   ,[Registration_Date]
+                                                   ,[Company_Website]
+                                                   ,[Contact_Phone]
+                                                   ,[Contact_Name]
+                                                   ,[Company_Logo])
+                                             VALUES
+                                                   (@Id
+                                                   ,@Registration_Date
+                                                   ,@Company_Website
+                                                   ,@Contact_Phone
+                                                   ,@Contact_Name
+                                                   ,@Company_Logo)";
+                    sqlCommand.Connection = sqlConnection;
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Registration_Date", poco.RegistrationDate);
+                    sqlCommand.Parameters.AddWithValue("@Company_Website", poco.CompanyWebsite);
+                    sqlCommand.Parameters.AddWithValue("@Contact_Phone", poco.ContactPhone);
+                    sqlCommand.Parameters.AddWithValue("@Contact_Name", poco.ContactName);
+                    sqlCommand.Parameters.AddWithValue("@Company_Logo", poco.CompanyLogo);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
