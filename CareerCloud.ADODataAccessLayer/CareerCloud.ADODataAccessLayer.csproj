@@ -59,6 +59,7 @@
     <Compile Include="SecurityLoginsLogRepository.cs" />
     <Compile Include="SecurityLoginsRoleRepository.cs" />
     <Compile Include="SecurityRoleRepository.cs" />
+    <Compile Include="SqlUtility.cs" />
     <Compile Include="SystemCountryCodeRepository.cs" />
     <Compile Include="SystemLanguageCodeRepository.cs" />
   </ItemGroup>
