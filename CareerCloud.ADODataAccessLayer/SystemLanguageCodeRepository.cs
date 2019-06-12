@@ -93,7 +93,7 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     SqlCommand sqlCommand = new SqlCommand
                     {
-                        CommandText = @"DELETE FROM [dbo].[System_Country_Codes]
+                        CommandText = @"DELETE FROM [dbo].[System_Language_Codes]
                                               WHERE LanguageID=@LanguageID",
                         Connection = sqlConnection
                     };

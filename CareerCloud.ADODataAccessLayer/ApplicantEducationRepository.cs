@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
@@ -84,12 +85,12 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantEducationPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Applicant = (Guid)sqlDataReader[1];
-                    poco.Major = (string)sqlDataReader[2];
-                    poco.CertificateDiploma = (string)sqlDataReader[3];
-                    poco.StartDate = (DateTime?)sqlDataReader[4];
-                    poco.CompletionDate = (DateTime?)sqlDataReader[5];
-                    poco.CompletionPercent = (byte?)sqlDataReader[6];
-                    poco.TimeStamp = (byte[])sqlDataReader[7];
+                    poco.Major = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.CertificateDiploma = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
+                    poco.StartDate = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (DateTime?)sqlDataReader[4];
+                    poco.CompletionDate = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (DateTime?)sqlDataReader[5];
+                    poco.CompletionPercent = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (byte?)sqlDataReader[6];
+                    poco.TimeStamp = (sqlDataReader[7].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[7];
 
                     result.Add(poco);
                 }

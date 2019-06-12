@@ -55,11 +55,6 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<CompanyProfilePoco> GetAll(params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
-        }
-
-        public IList<CompanyProfilePoco> GetList(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)
-        {
             var result = new List<CompanyProfilePoco>();
 
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
@@ -83,17 +78,22 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new CompanyProfilePoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.RegistrationDate = (DateTime)sqlDataReader[1];
-                    poco.CompanyWebsite = (string)sqlDataReader[2];
-                    poco.ContactPhone = (string)sqlDataReader[3];
-                    poco.ContactName = (string)sqlDataReader[4];
-                    poco.CompanyLogo = (byte[])sqlDataReader[5];
-                    poco.TimeStamp = (byte[])sqlDataReader[6];
+                    poco.CompanyWebsite = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.ContactPhone = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
+                    poco.ContactName = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[4];
+                    poco.CompanyLogo = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[5];
+                    poco.TimeStamp = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[6];
 
                     result.Add(poco);
                 }
                 sqlConnection.Close();
             }
             return result;
+        }
+
+        public IList<CompanyProfilePoco> GetList(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)
+        {
+            throw new NotImplementedException();
         }
 
         public CompanyProfilePoco GetSingle(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)

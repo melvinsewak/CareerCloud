@@ -57,7 +57,7 @@ namespace CareerCloud.ADODataAccessLayer
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Applicant]
                                               ,[Resume]
-                                              ,[Last_Updated]
+                                              ,[Last_Updated] 
                                           FROM [dbo].[Applicant_Resumes]";
                 sqlCommand.Connection = sqlConnection;
 
@@ -70,7 +70,9 @@ namespace CareerCloud.ADODataAccessLayer
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Applicant = (Guid)sqlDataReader[1];
                     poco.Resume = (string)sqlDataReader[2];
-                    poco.LastUpdated = (DateTime?)sqlDataReader[3];
+
+                    //PATCH FIX: To avoid error, added check on type
+                    poco.LastUpdated = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ?null: (DateTime?)sqlDataReader[3];
 
                     result.Add(poco);
                 }

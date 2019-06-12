@@ -105,19 +105,19 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     var poco = new SecurityLoginPoco();
                     poco.Id = (Guid)sqlDataReader[0];
-                    poco.Login = (string)sqlDataReader[1];
-                    poco.Password = (string)sqlDataReader[2];
+                    poco.Login = (sqlDataReader[1].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[1];
+                    poco.Password = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
                     poco.Created = (DateTime)sqlDataReader[3];
-                    poco.PasswordUpdate = (DateTime?)sqlDataReader[4];
-                    poco.AgreementAccepted = (DateTime?)sqlDataReader[5];
+                    poco.PasswordUpdate = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (DateTime?)sqlDataReader[4];
+                    poco.AgreementAccepted = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (DateTime?)sqlDataReader[5];
                     poco.IsLocked = (bool)sqlDataReader[6];
                     poco.IsInactive = (bool)sqlDataReader[7];
-                    poco.EmailAddress = (string)sqlDataReader[8];
-                    poco.PhoneNumber = (string)sqlDataReader[9];
-                    poco.FullName = (string)sqlDataReader[10];
+                    poco.EmailAddress = (sqlDataReader[8].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[8];
+                    poco.PhoneNumber = (sqlDataReader[9].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[9];
+                    poco.FullName = (sqlDataReader[10].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[10];
                     poco.ForceChangePassword = (bool)sqlDataReader[11];
-                    poco.PrefferredLanguage = (string)sqlDataReader[12];
-                    poco.TimeStamp = (byte[])sqlDataReader[13];
+                    poco.PrefferredLanguage = (sqlDataReader[12].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[12];
+                    poco.TimeStamp = (sqlDataReader[13].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[13];
 
                     result.Add(poco);
                 }
