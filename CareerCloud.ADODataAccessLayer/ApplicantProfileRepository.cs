@@ -148,7 +148,43 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params ApplicantProfilePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        CommandText = @"UPDATE [dbo].[Applicant_Profiles]
+                                       SET [Login] = @Login
+                                          ,[Current_Salary] = @Current_Salary
+                                          ,[Current_Rate] = @Current_Rate
+                                          ,[Currency] = @Currency
+                                          ,[Country_Code] = @Country_Code
+                                          ,[State_Province_Code] = @State_Province_Code
+                                          ,[Street_Address] = @Street_Address
+                                          ,[City_Town] = @City_Town
+                                          ,[Zip_Postal_Code] = @Zip_Postal_Code
+                                     WHERE [Id] = @Id",
+                        Connection = sqlConnection
+                    };
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
+                    sqlCommand.Parameters.AddWithValue("@Current_Salary", poco.CurrentSalary);
+                    sqlCommand.Parameters.AddWithValue("@Current_Rate", poco.CurrentRate);
+                    sqlCommand.Parameters.AddWithValue("@Currency", poco.Currency);
+                    sqlCommand.Parameters.AddWithValue("@Country_Code", poco.Country);
+                    sqlCommand.Parameters.AddWithValue("@State_Province_Code", poco.Province);
+                    sqlCommand.Parameters.AddWithValue("@Street_Address", poco.Street);
+                    sqlCommand.Parameters.AddWithValue("@City_Town", poco.City);
+                    sqlCommand.Parameters.AddWithValue("@Zip_Postal_Code", poco.PostalCode);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
     }
 

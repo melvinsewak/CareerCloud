@@ -153,7 +153,45 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params ApplicantWorkHistoryPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        CommandText = @"UPDATE [dbo].[Applicant_Work_History]
+                                       SET [Applicant] = @Applicant
+                                          ,[Company_Name] = @Company_Name
+                                          ,[Country_Code] = @Country_Code
+                                          ,[Location] = @Location
+                                          ,[Job_Title] = @Job_Title
+                                          ,[Job_Description] = @Job_Description
+                                          ,[Start_Month] = @Start_Month
+                                          ,[Start_Year] = @Start_Year
+                                          ,[End_Month] = @End_Month
+                                          ,[End_Year] = @End_Year
+                                     WHERE [Id] = @Id",
+                        Connection = sqlConnection
+                    };
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Applicant", poco.Applicant);
+                    sqlCommand.Parameters.AddWithValue("@Company_Name", poco.CompanyName);
+                    sqlCommand.Parameters.AddWithValue("@Country_Code", poco.CountryCode);
+                    sqlCommand.Parameters.AddWithValue("@Location", poco.Location);
+                    sqlCommand.Parameters.AddWithValue("@Job_Title", poco.JobTitle);
+                    sqlCommand.Parameters.AddWithValue("@Job_Description", poco.JobDescription);
+                    sqlCommand.Parameters.AddWithValue("@Start_Month", poco.StartMonth);
+                    sqlCommand.Parameters.AddWithValue("@Start_Year", poco.StartYear);
+                    sqlCommand.Parameters.AddWithValue("@End_Month", poco.EndMonth);
+                    sqlCommand.Parameters.AddWithValue("@End_Year", poco.EndYear);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
     }
 

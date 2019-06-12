@@ -162,7 +162,49 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params SecurityLoginPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        CommandText = @"UPDATE [dbo].[Security_Logins]
+                                        SET [Login] = @Login
+                                            ,[Password] = @Password
+                                            ,[Created_Date] = @Created_Date
+                                            ,[Password_Update_Date] = @Password_Update_Date
+                                            ,[Agreement_Accepted_Date] = @Agreement_Accepted_Date
+                                            ,[Is_Locked] = @Is_Locked
+                                            ,[Is_Inactive] = @Is_Inactive
+                                            ,[Email_Address] = @Email_Address
+                                            ,[Phone_Number] = @Phone_Number
+                                            ,[Full_Name] = @Full_Name
+                                            ,[Force_Change_Password] = @Force_Change_Password
+                                            ,[Prefferred_Language] = @Prefferred_Language
+                                        WHERE [Id] = @Id",
+                        Connection = sqlConnection
+                    };
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
+                    sqlCommand.Parameters.AddWithValue("@Password", poco.Password);
+                    sqlCommand.Parameters.AddWithValue("@Created_Date", poco.Created);
+                    sqlCommand.Parameters.AddWithValue("@Password_Update_Date", poco.PasswordUpdate);
+                    sqlCommand.Parameters.AddWithValue("@Agreement_Accepted_Date", poco.AgreementAccepted);
+                    sqlCommand.Parameters.AddWithValue("@Is_Locked", poco.IsLocked);
+                    sqlCommand.Parameters.AddWithValue("@Is_Inactive", poco.IsInactive);
+                    sqlCommand.Parameters.AddWithValue("@Email_Address", poco.EmailAddress);
+                    sqlCommand.Parameters.AddWithValue("@Phone_Number", poco.PhoneNumber);
+                    sqlCommand.Parameters.AddWithValue("@Full_Name", poco.FullName);
+                    sqlCommand.Parameters.AddWithValue("@Force_Change_Password", poco.ForceChangePassword);
+                    sqlCommand.Parameters.AddWithValue("@Prefferred_Language", poco.PrefferredLanguage);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
     }
 

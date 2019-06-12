@@ -132,7 +132,37 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params CompanyLocationPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        CommandText = @"UPDATE [dbo].[Company_Locations]
+                                        SET [Company] = @Company
+                                            ,[Country_Code] = @Country_Code
+                                            ,[State_Province_Code] = @State_Province_Code
+                                            ,[Street_Address] = @Street_Address
+                                            ,[City_Town] = @City_Town
+                                            ,[Zip_Postal_Code] = @Zip_Postal_Code
+                                        WHERE [Id] = @Id",
+                        Connection = sqlConnection
+                    };
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Company", poco.Company);
+                    sqlCommand.Parameters.AddWithValue("@Country_Code", poco.CountryCode);
+                    sqlCommand.Parameters.AddWithValue("@State_Province_Code", poco.Province);
+                    sqlCommand.Parameters.AddWithValue("@Street_Address", poco.Street);
+                    sqlCommand.Parameters.AddWithValue("@City_Town", poco.City);
+                    sqlCommand.Parameters.AddWithValue("@Zip_Postal_Code", poco.PostalCode);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
     }
 

@@ -112,7 +112,29 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params SecurityLoginsRolePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
+            {
+                foreach (var poco in items)
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        CommandText = @"UPDATE [dbo].[Security_Logins_Roles]
+                                        SET [Login] = @Login
+                                            ,[Role] = @Role
+                                        WHERE [Id] = @Id",
+                        Connection = sqlConnection
+                    };
+
+                    sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
+                    sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
+                    sqlCommand.Parameters.AddWithValue("@Role", poco.Role);
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+            }
         }
     }
 
