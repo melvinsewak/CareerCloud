@@ -98,16 +98,16 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantWorkHistoryPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Applicant = (Guid)sqlDataReader[1];
-                    poco.CompanyName = (string)sqlDataReader[2];
-                    poco.CountryCode = (string)sqlDataReader[3];
-                    poco.Location = (string)sqlDataReader[4];
-                    poco.JobTitle = (string)sqlDataReader[5];
-                    poco.JobDescription = (string)sqlDataReader[6];
+                    poco.CompanyName = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.CountryCode = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
+                    poco.Location = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[4];
+                    poco.JobTitle = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[5];
+                    poco.JobDescription = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[6];
                     poco.StartMonth = (short)sqlDataReader[7];
                     poco.StartYear = (int)sqlDataReader[8];
                     poco.EndMonth = (short)sqlDataReader[9];
                     poco.EndYear = (int)sqlDataReader[10];
-                    poco.TimeStamp = (byte[])sqlDataReader[11];
+                    poco.TimeStamp = (sqlDataReader[11].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[11];
 
                     result.Add(poco);
                 }

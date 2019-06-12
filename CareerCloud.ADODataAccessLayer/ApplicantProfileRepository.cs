@@ -94,15 +94,15 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantProfilePoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Login = (Guid)sqlDataReader[1];
-                    poco.CurrentSalary = (decimal?)sqlDataReader[2];
-                    poco.CurrentRate = (decimal?)sqlDataReader[3];
-                    poco.Currency = (string)sqlDataReader[4];
-                    poco.Country = (string)sqlDataReader[5];
-                    poco.Province = (string)sqlDataReader[6];
-                    poco.Street = (string)sqlDataReader[7];
-                    poco.City = (string)sqlDataReader[8];
-                    poco.PostalCode = (string)sqlDataReader[9];
-                    poco.TimeStamp = (byte[])sqlDataReader[10];
+                    poco.CurrentSalary = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (decimal?)sqlDataReader[2];
+                    poco.CurrentRate = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (decimal?)sqlDataReader[3];
+                    poco.Currency = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[4];
+                    poco.Country = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[5];
+                    poco.Province = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[6];
+                    poco.Street = (sqlDataReader[7].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[7];
+                    poco.City = (sqlDataReader[8].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[8];
+                    poco.PostalCode = (sqlDataReader[9].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[9];
+                    poco.TimeStamp = (sqlDataReader[10].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[10];
 
                     result.Add(poco);
                 }

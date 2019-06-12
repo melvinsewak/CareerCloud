@@ -77,7 +77,7 @@ namespace CareerCloud.ADODataAccessLayer
                     poco.ProfileCreated = (DateTime)sqlDataReader[2];
                     poco.IsInactive = (bool)sqlDataReader[3];
                     poco.IsCompanyHidden = (bool)sqlDataReader[4];
-                    poco.TimeStamp = (byte[])sqlDataReader[5];
+                    poco.TimeStamp = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[5];
 
                     result.Add(poco);
                 }

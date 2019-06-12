@@ -67,7 +67,7 @@ namespace CareerCloud.ADODataAccessLayer
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Login = (Guid)sqlDataReader[1];
                     poco.Role = (Guid)sqlDataReader[2];
-                    poco.TimeStamp = (byte[])sqlDataReader[3];
+                    poco.TimeStamp = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[3];
 
                     result.Add(poco);
                 }

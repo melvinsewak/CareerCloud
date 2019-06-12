@@ -74,10 +74,10 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new CompanyDescriptionPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Company = (Guid)sqlDataReader[1];
-                    poco.LanguageId = (string)sqlDataReader[2];
-                    poco.CompanyName = (string)sqlDataReader[3];
-                    poco.CompanyDescription = (string)sqlDataReader[4];
-                    poco.TimeStamp = (byte[])sqlDataReader[5];
+                    poco.LanguageId = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.CompanyName = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
+                    poco.CompanyDescription = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[4];
+                    poco.TimeStamp = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[5];
 
                     result.Add(poco);
                 }

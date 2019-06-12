@@ -73,7 +73,7 @@ namespace CareerCloud.ADODataAccessLayer
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read())
+                while (sqlDataReader.Read())   
                 {
                     var poco = new CompanyProfilePoco();
                     poco.Id = (Guid)sqlDataReader[0];

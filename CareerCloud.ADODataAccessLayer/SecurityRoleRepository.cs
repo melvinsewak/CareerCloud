@@ -64,7 +64,7 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     var poco = new SecurityRolePoco();
                     poco.Id = (Guid)sqlDataReader[0];
-                    poco.Role = (string)sqlDataReader[1];
+                    poco.Role = (sqlDataReader[1].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[1];
                     poco.IsInactive = (bool)sqlDataReader[2];
 
                     result.Add(poco);

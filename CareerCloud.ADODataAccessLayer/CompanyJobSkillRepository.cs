@@ -74,10 +74,10 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new CompanyJobSkillPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Job = (Guid)sqlDataReader[1];
-                    poco.Skill = (string)sqlDataReader[2];
-                    poco.SkillLevel = (string)sqlDataReader[3];
+                    poco.Skill = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.SkillLevel = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
                     poco.Importance = (int)sqlDataReader[4];
-                    poco.TimeStamp = (byte[])sqlDataReader[5];
+                    poco.TimeStamp = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[5];
 
                     result.Add(poco);
                 }

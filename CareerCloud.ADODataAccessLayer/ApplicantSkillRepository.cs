@@ -86,13 +86,13 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantSkillPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Applicant = (Guid)sqlDataReader[1];
-                    poco.Skill = (string)sqlDataReader[2];
-                    poco.SkillLevel = (string)sqlDataReader[3];
+                    poco.Skill = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.SkillLevel = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
                     poco.StartMonth = (byte)sqlDataReader[4];
                     poco.StartYear = (int)sqlDataReader[5];
                     poco.EndMonth = (byte)sqlDataReader[6];
                     poco.EndYear = (int)sqlDataReader[7];
-                    poco.TimeStamp = (byte[])sqlDataReader[8];
+                    poco.TimeStamp = (sqlDataReader[8].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[8];
 
                     result.Add(poco);
                 }

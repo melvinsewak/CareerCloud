@@ -73,7 +73,7 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new SecurityLoginsLogPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Login = (Guid)sqlDataReader[1];
-                    poco.SourceIP = (string)sqlDataReader[2];
+                    poco.SourceIP = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
                     poco.LogonDate = (DateTime)sqlDataReader[3];
                     poco.IsSuccesful = (bool)sqlDataReader[4];
 
