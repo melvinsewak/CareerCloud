@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[Company_Job_Educations]
                                                    ([Id]
                                                    ,[Job]
@@ -27,7 +29,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    ,@Job
                                                    ,@Major
                                                    ,@Importance)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Job", poco.Job);
@@ -54,13 +55,13 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Job]
                                               ,[Major]
                                               ,[Importance]
                                               ,[Time_Stamp]
                                           FROM [dbo].[Company_Job_Educations]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -97,14 +98,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[Company_Job_Educations]
-                                              WHERE Id=@Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[Company_Job_Educations]
+                                              WHERE Id=@Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
 
@@ -120,17 +120,16 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[Company_Job_Educations]
-                                       SET [Job] = @Job
-                                          ,[Major] = @Major
-                                          ,[Importance] = @Importance
-                                     WHERE [Id] = @Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[Company_Job_Educations]
+                                                SET [Job] = @Job
+                                                    ,[Major] = @Major
+                                                    ,[Importance] = @Importance
+                                                WHERE [Id] = @Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Job", poco.Job);

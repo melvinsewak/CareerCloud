@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[Security_Logins_Log]
                                                    ([Id]
                                                    ,[Login]
@@ -29,7 +31,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    ,@Source_IP
                                                    ,@Logon_Date
                                                    ,@Is_Succesful)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
@@ -57,13 +58,13 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Login]
                                               ,[Source_IP]
                                               ,[Logon_Date]
                                               ,[Is_Succesful]
                                           FROM [dbo].[Security_Logins_Log]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -99,14 +100,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[Security_Logins_Log]
-                                              WHERE Id=@Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[Security_Logins_Log]
+                                              WHERE Id=@Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
 
@@ -122,18 +122,17 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[Security_Logins_Log]
-                                        SET [Login] = @Login
-                                            ,[Source_IP] = @Source_IP
-                                            ,[Logon_Date] = @Logon_Date
-                                            ,[Is_Succesful] = @Is_Succesful
-                                        WHERE [Id] = @Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[Security_Logins_Log]
+                                                SET [Login] = @Login
+                                                    ,[Source_IP] = @Source_IP
+                                                    ,[Logon_Date] = @Logon_Date
+                                                    ,[Is_Succesful] = @Is_Succesful
+                                                WHERE [Id] = @Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Login", poco.Login);

@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[System_Language_Codes]
                                                    ([LanguageID]
                                                    ,[Name]
@@ -25,7 +27,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    (@LanguageID
                                                    ,@Name
                                                    ,@Native_Name)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@LanguageID", poco.LanguageID);
                     sqlCommand.Parameters.AddWithValue("@Name", poco.Name);
@@ -51,11 +52,11 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [LanguageID]
                                             ,[Name]
                                             ,[Native_Name]
                                         FROM [dbo].[System_Language_Codes]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -89,14 +90,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[System_Language_Codes]
-                                              WHERE LanguageID=@LanguageID",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[System_Language_Codes]
+                                              WHERE LanguageID=@LanguageID";
 
                     sqlCommand.Parameters.AddWithValue("@LanguageID", poco.LanguageID);
 
@@ -112,16 +112,15 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[System_Language_Codes]
-                                        SET [Name] = @Name
-                                            ,[Native_Name] = @Native_Name
-                                        WHERE [LanguageID] = @LanguageID",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[System_Language_Codes]
+                                                SET [Name] = @Name
+                                                    ,[Native_Name] = @Native_Name
+                                                WHERE [LanguageID] = @LanguageID";
 
                     sqlCommand.Parameters.AddWithValue("@LanguageID", poco.LanguageID);
                     sqlCommand.Parameters.AddWithValue("@Name", poco.Name);

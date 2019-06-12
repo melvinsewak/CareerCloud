@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[Applicant_Profiles]
                                                    ([Id]
                                                    ,[Login]
@@ -39,7 +41,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    ,@Street_Address
                                                    ,@City_Town
                                                    ,@Zip_Postal_Code)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
@@ -72,6 +73,7 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Login]
                                               ,[Current_Salary]
@@ -84,7 +86,6 @@ namespace CareerCloud.ADODataAccessLayer
                                               ,[Zip_Postal_Code]
                                               ,[Time_Stamp]
                                           FROM [dbo].[Applicant_Profiles]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -127,14 +128,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[Applicant_Profiles]
-                                              WHERE Id=@Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[Applicant_Profiles]
+                                              WHERE Id=@Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
 
@@ -150,23 +150,22 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[Applicant_Profiles]
-                                       SET [Login] = @Login
-                                          ,[Current_Salary] = @Current_Salary
-                                          ,[Current_Rate] = @Current_Rate
-                                          ,[Currency] = @Currency
-                                          ,[Country_Code] = @Country_Code
-                                          ,[State_Province_Code] = @State_Province_Code
-                                          ,[Street_Address] = @Street_Address
-                                          ,[City_Town] = @City_Town
-                                          ,[Zip_Postal_Code] = @Zip_Postal_Code
-                                     WHERE [Id] = @Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[Applicant_Profiles]
+                                                SET [Login] = @Login
+                                                    ,[Current_Salary] = @Current_Salary
+                                                    ,[Current_Rate] = @Current_Rate
+                                                    ,[Currency] = @Currency
+                                                    ,[Country_Code] = @Country_Code
+                                                    ,[State_Province_Code] = @State_Province_Code
+                                                    ,[Street_Address] = @Street_Address
+                                                    ,[City_Town] = @City_Town
+                                                    ,[Zip_Postal_Code] = @Zip_Postal_Code
+                                                WHERE [Id] = @Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Login", poco.Login);

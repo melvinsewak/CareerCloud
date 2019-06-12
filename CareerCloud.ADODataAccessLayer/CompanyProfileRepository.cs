@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[Company_Profiles]
                                                    ([Id]
                                                    ,[Registration_Date]
@@ -31,7 +33,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    ,@Contact_Phone
                                                    ,@Contact_Name
                                                    ,@Company_Logo)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Registration_Date", poco.RegistrationDate);
@@ -60,6 +61,7 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Registration_Date]
                                               ,[Company_Website]
@@ -68,7 +70,6 @@ namespace CareerCloud.ADODataAccessLayer
                                               ,[Company_Logo]
                                               ,[Time_Stamp]
                                           FROM [dbo].[Company_Profiles]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -106,14 +107,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[Company_Profiles]
-                                              WHERE Id=@Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[Company_Profiles]
+                                              WHERE Id=@Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
 
@@ -129,19 +129,18 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[Company_Profiles]
-                                        SET [Registration_Date] = @Registration_Date
-                                            ,[Company_Website] = @Company_Website
-                                            ,[Contact_Phone] = @Contact_Phone
-                                            ,[Contact_Name] = @Contact_Name
-                                            ,[Company_Logo] = @Company_Logo
-                                        WHERE [Id] = @Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[Company_Profiles]
+                                                SET [Registration_Date] = @Registration_Date
+                                                    ,[Company_Website] = @Company_Website
+                                                    ,[Contact_Phone] = @Contact_Phone
+                                                    ,[Contact_Name] = @Contact_Name
+                                                    ,[Company_Logo] = @Company_Logo
+                                                WHERE [Id] = @Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Registration_Date", poco.RegistrationDate);

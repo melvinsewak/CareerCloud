@@ -14,16 +14,17 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[System_Country_Codes]
                                                 ([Code]
                                                 ,[Name])
                                             VALUES
                                                 (@Code
                                                 ,@Name)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Code", poco.Code);
                     sqlCommand.Parameters.AddWithValue("@Name", poco.Name);
@@ -48,10 +49,10 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Code]
                                             ,[Name]
                                         FROM [dbo].[System_Country_Codes]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -84,14 +85,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[System_Country_Codes]
-                                              WHERE Code=@Code",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[System_Country_Codes]
+                                              WHERE Code=@Code";
 
                     sqlCommand.Parameters.AddWithValue("@Code", poco.Code);
 
@@ -107,15 +107,14 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[System_Country_Codes]
+                    sqlCommand.CommandText = @"UPDATE [dbo].[System_Country_Codes]
                                         SET [Name] = @Name
-                                        WHERE [Code] = @Code",
-                        Connection = sqlConnection
-                    };
+                                        WHERE [Code] = @Code";
 
                     sqlCommand.Parameters.AddWithValue("@Code", poco.Code);
                     sqlCommand.Parameters.AddWithValue("@Name", poco.Name);

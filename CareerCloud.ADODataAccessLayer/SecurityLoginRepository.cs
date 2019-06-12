@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[Security_Logins]
                                                    ([Id]
                                                    ,[Login]
@@ -45,7 +47,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    ,@Full_Name
                                                    ,@Force_Change_Password
                                                    ,@Prefferred_Language)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Login", poco.Login);
@@ -81,6 +82,7 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Login]
                                               ,[Password]
@@ -96,7 +98,6 @@ namespace CareerCloud.ADODataAccessLayer
                                               ,[Prefferred_Language]
                                               ,[Time_Stamp]
                                           FROM [dbo].[Security_Logins]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -141,14 +142,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[Security_Logins]
-                                              WHERE Id=@Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[Security_Logins]
+                                              WHERE Id=@Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
 
@@ -164,26 +164,25 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[Security_Logins]
-                                        SET [Login] = @Login
-                                            ,[Password] = @Password
-                                            ,[Created_Date] = @Created_Date
-                                            ,[Password_Update_Date] = @Password_Update_Date
-                                            ,[Agreement_Accepted_Date] = @Agreement_Accepted_Date
-                                            ,[Is_Locked] = @Is_Locked
-                                            ,[Is_Inactive] = @Is_Inactive
-                                            ,[Email_Address] = @Email_Address
-                                            ,[Phone_Number] = @Phone_Number
-                                            ,[Full_Name] = @Full_Name
-                                            ,[Force_Change_Password] = @Force_Change_Password
-                                            ,[Prefferred_Language] = @Prefferred_Language
-                                        WHERE [Id] = @Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[Security_Logins]
+                                                SET [Login] = @Login
+                                                    ,[Password] = @Password
+                                                    ,[Created_Date] = @Created_Date
+                                                    ,[Password_Update_Date] = @Password_Update_Date
+                                                    ,[Agreement_Accepted_Date] = @Agreement_Accepted_Date
+                                                    ,[Is_Locked] = @Is_Locked
+                                                    ,[Is_Inactive] = @Is_Inactive
+                                                    ,[Email_Address] = @Email_Address
+                                                    ,[Phone_Number] = @Phone_Number
+                                                    ,[Full_Name] = @Full_Name
+                                                    ,[Force_Change_Password] = @Force_Change_Password
+                                                    ,[Prefferred_Language] = @Prefferred_Language
+                                                WHERE [Id] = @Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Login", poco.Login);

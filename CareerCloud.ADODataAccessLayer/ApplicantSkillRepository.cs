@@ -14,9 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand();
                     sqlCommand.CommandText = @"INSERT INTO [dbo].[Applicant_Skills]
                                                    ([Id]
                                                    ,[Applicant]
@@ -35,7 +37,6 @@ namespace CareerCloud.ADODataAccessLayer
                                                    ,@Start_Year
                                                    ,@End_Month
                                                    ,@End_Year)";
-                    sqlCommand.Connection = sqlConnection;
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Applicant", poco.Applicant);
@@ -66,6 +67,7 @@ namespace CareerCloud.ADODataAccessLayer
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
                 SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"SELECT [Id]
                                               ,[Applicant]
                                               ,[Skill]
@@ -76,7 +78,6 @@ namespace CareerCloud.ADODataAccessLayer
                                               ,[End_Year]
                                               ,[Time_Stamp]
                                           FROM [dbo].[Applicant_Skills]";
-                sqlCommand.Connection = sqlConnection;
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -117,14 +118,13 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"DELETE FROM [dbo].[Applicant_Skills]
-                                              WHERE Id=@Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"DELETE FROM [dbo].[Applicant_Skills]
+                                              WHERE Id=@Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
 
@@ -140,21 +140,20 @@ namespace CareerCloud.ADODataAccessLayer
         {
             using (SqlConnection sqlConnection = new SqlConnection(SqlUtility.ConnectionString))
             {
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+
                 foreach (var poco in items)
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        CommandText = @"UPDATE [dbo].[Applicant_Skills]
-                                       SET [Applicant] = @Applicant
-                                          ,[Skill] = @Skill
-                                          ,[Skill_Level] = @Skill_Level
-                                          ,[Start_Month] = @Start_Month
-                                          ,[Start_Year] = @Start_Year
-                                          ,[End_Month] = @End_Month
-                                          ,[End_Year] = @End_Year
-                                     WHERE [Id] = @Id",
-                        Connection = sqlConnection
-                    };
+                    sqlCommand.CommandText = @"UPDATE [dbo].[Applicant_Skills]
+                                                SET [Applicant] = @Applicant
+                                                    ,[Skill] = @Skill
+                                                    ,[Skill_Level] = @Skill_Level
+                                                    ,[Start_Month] = @Start_Month
+                                                    ,[Start_Year] = @Start_Year
+                                                    ,[End_Month] = @End_Month
+                                                    ,[End_Year] = @End_Year
+                                                WHERE [Id] = @Id";
 
                     sqlCommand.Parameters.AddWithValue("@Id", poco.Id);
                     sqlCommand.Parameters.AddWithValue("@Applicant", poco.Applicant);
