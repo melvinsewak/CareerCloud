@@ -9,6 +9,6 @@ namespace CareerCloud.ADODataAccessLayer
 {
     public class SqlUtility
     {
-        public static string ConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+        public static string ConnectionString { get;} = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
     }
 }
