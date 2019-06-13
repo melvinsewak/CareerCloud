@@ -71,9 +71,9 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new CompanyJobEducationPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Job = (Guid)sqlDataReader[1];
-                    poco.Major = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.Major = sqlDataReader[2] as string;
                     poco.Importance = (short)sqlDataReader[3];
-                    poco.TimeStamp = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[4];
+                    poco.TimeStamp = sqlDataReader[4] as byte[];
 
                     result.Add(poco);
                 }

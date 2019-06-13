@@ -83,12 +83,12 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new CompanyLocationPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Company = (Guid)sqlDataReader[1];
-                    poco.CountryCode = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
-                    poco.Province = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
-                    poco.Street = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[4];
-                    poco.City = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[5];
-                    poco.PostalCode = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[6];
-                    poco.TimeStamp = (sqlDataReader[7].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[7];
+                    poco.CountryCode = sqlDataReader[2] as string;
+                    poco.Province = sqlDataReader[3] as string;
+                    poco.Street = sqlDataReader[4] as string;
+                    poco.City = sqlDataReader[5] as string;
+                    poco.PostalCode = sqlDataReader[6] as string;
+                    poco.TimeStamp = sqlDataReader[7] as byte[];
 
                     result.Add(poco);
                 }

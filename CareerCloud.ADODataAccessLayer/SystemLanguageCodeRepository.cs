@@ -64,9 +64,9 @@ namespace CareerCloud.ADODataAccessLayer
                 while (sqlDataReader.Read())
                 {
                     var poco = new SystemLanguageCodePoco();
-                    poco.LanguageID = (sqlDataReader[0].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[0];
-                    poco.Name = (sqlDataReader[1].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[1];
-                    poco.NativeName = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
+                    poco.LanguageID = sqlDataReader[0] as string;
+                    poco.Name = sqlDataReader[1] as string;
+                    poco.NativeName = sqlDataReader[2] as string;
                      
                     result.Add(poco);
                 }

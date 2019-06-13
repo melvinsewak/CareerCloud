@@ -86,12 +86,12 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantEducationPoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Applicant = (Guid)sqlDataReader[1];
-                    poco.Major = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
-                    poco.CertificateDiploma = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[3];
-                    poco.StartDate = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (DateTime?)sqlDataReader[4];
-                    poco.CompletionDate = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (DateTime?)sqlDataReader[5];
-                    poco.CompletionPercent = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (byte?)sqlDataReader[6];
-                    poco.TimeStamp = (sqlDataReader[7].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[7];
+                    poco.Major = sqlDataReader[2] as string;
+                    poco.CertificateDiploma = sqlDataReader[3] as string;
+                    poco.StartDate = sqlDataReader[4] as DateTime?;
+                    poco.CompletionDate = sqlDataReader[5] as DateTime?;
+                    poco.CompletionPercent = sqlDataReader[6] as byte?;
+                    poco.TimeStamp = sqlDataReader[7] as byte[];
 
                     result.Add(poco);
                 }

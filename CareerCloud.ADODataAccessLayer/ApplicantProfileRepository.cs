@@ -95,15 +95,15 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantProfilePoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Login = (Guid)sqlDataReader[1];
-                    poco.CurrentSalary = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (decimal?)sqlDataReader[2];
-                    poco.CurrentRate = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ? null : (decimal?)sqlDataReader[3];
-                    poco.Currency = (sqlDataReader[4].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[4];
-                    poco.Country = (sqlDataReader[5].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[5];
-                    poco.Province = (sqlDataReader[6].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[6];
-                    poco.Street = (sqlDataReader[7].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[7];
-                    poco.City = (sqlDataReader[8].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[8];
-                    poco.PostalCode = (sqlDataReader[9].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[9];
-                    poco.TimeStamp = (sqlDataReader[10].GetType()).Equals(typeof(System.DBNull)) ? null : (byte[])sqlDataReader[10];
+                    poco.CurrentSalary = sqlDataReader[2] as decimal?;
+                    poco.CurrentRate = sqlDataReader[3] as decimal?;
+                    poco.Currency = sqlDataReader[4] as string;
+                    poco.Country = sqlDataReader[5] as string;
+                    poco.Province = sqlDataReader[6] as string;
+                    poco.Street = sqlDataReader[7] as string;
+                    poco.City =  sqlDataReader[8] as string;
+                    poco.PostalCode =  sqlDataReader[9] as string;
+                    poco.TimeStamp =  sqlDataReader[10] as byte[];
 
                     result.Add(poco);
                 }

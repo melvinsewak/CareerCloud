@@ -70,10 +70,8 @@ namespace CareerCloud.ADODataAccessLayer
                     var poco = new ApplicantResumePoco();
                     poco.Id = (Guid)sqlDataReader[0];
                     poco.Applicant = (Guid)sqlDataReader[1];
-                    poco.Resume = (sqlDataReader[2].GetType()).Equals(typeof(System.DBNull)) ? null : (string)sqlDataReader[2];
-
-                    //PATCH FIX: To avoid error, added check on type
-                    poco.LastUpdated = (sqlDataReader[3].GetType()).Equals(typeof(System.DBNull)) ?null: (DateTime?)sqlDataReader[3];
+                    poco.Resume = sqlDataReader[2] as string;
+                    poco.LastUpdated = sqlDataReader[3] as DateTime?;
 
                     result.Add(poco);
                 }
