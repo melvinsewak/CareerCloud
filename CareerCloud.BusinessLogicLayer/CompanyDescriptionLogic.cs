@@ -40,14 +40,14 @@ namespace CareerCloud.BusinessLogicLayer
             foreach (var poco in pocos)
             {
                 if (string.IsNullOrWhiteSpace(poco.CompanyName))
-                    exceptions.Add(new ValidationException(106, $"CompanyName for CompanyDescriptionPoco {poco.Id} cannot be null or empty"));
+                    exceptions.Add(new ValidationException(106, $"CompanyName for CompanyDescription {poco.Id} cannot be null or empty"));
                 else if (poco.CompanyName.Length <= 2)
-                    exceptions.Add(new ValidationException(106, $"CompanyName for CompanyDescriptionPoco {poco.Id} must be greater than 2 characters"));
+                    exceptions.Add(new ValidationException(106, $"CompanyName for CompanyDescription {poco.Id} must be greater than 2 characters"));
 
                 if (string.IsNullOrWhiteSpace(poco.CompanyDescription))
-                    exceptions.Add(new ValidationException(107, $"CompanyDescription for CompanyDescriptionPoco {poco.Id} can not be null or empty"));
+                    exceptions.Add(new ValidationException(107, $"CompanyDescription for CompanyDescription {poco.Id} can not be null or empty"));
                 else if (poco.CompanyDescription.Length <= 2)
-                    exceptions.Add(new ValidationException(107, $"CompanyDescription for CompanyDescriptionPoco {poco.Id} must be greater than 2 characters"));
+                    exceptions.Add(new ValidationException(107, $"CompanyDescription for CompanyDescription {poco.Id} must be greater than 2 characters"));
             }
 
             if (exceptions.Count > 0)

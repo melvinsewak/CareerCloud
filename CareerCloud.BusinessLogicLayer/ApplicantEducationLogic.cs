@@ -48,7 +48,7 @@ namespace CareerCloud.BusinessLogicLayer
                     exceptions.Add(new ValidationException(107, $"Major for ApplicantEducation {poco.Id} cannot be less than 3 characters"));
 
                 if (poco.StartDate > DateTime.Now)
-                    exceptions.Add(new ValidationException(108, $"StartDate for ApplicantEducation {poco.Id} cannot be greater than today's date"));
+                    exceptions.Add(new ValidationException(108, $"StartDate for ApplicantEducation {poco.Id} cannot be greater than current date and time"));
 
                 if (poco.CompletionDate < poco.StartDate)
                     exceptions.Add(new ValidationException(109, $"CompletionDate for ApplicantEducation {poco.Id} cannot be earlier than StartDate"));

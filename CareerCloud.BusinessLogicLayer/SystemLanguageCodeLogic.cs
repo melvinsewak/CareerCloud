@@ -22,11 +22,11 @@ namespace CareerCloud.BusinessLogicLayer
             foreach (var poco in pocos)
             {
                 if (string.IsNullOrWhiteSpace(poco.LanguageID))
-                    exceptions.Add(new ValidationException(1000, $"LanguageID for SystemLanguageCodePoco {poco.LanguageID} cannot be null or empty"));
+                    exceptions.Add(new ValidationException(1000, $"LanguageID for SystemLanguageCode {poco.LanguageID} cannot be null or empty"));
                 if (string.IsNullOrWhiteSpace(poco.Name))
-                    exceptions.Add(new ValidationException(1001, $"Name for SystemLanguageCodePoco {poco.LanguageID} cannot be null or empty"));
+                    exceptions.Add(new ValidationException(1001, $"Name for SystemLanguageCode {poco.LanguageID} cannot be null or empty"));
                 if (string.IsNullOrWhiteSpace(poco.NativeName))
-                    exceptions.Add(new ValidationException(1002, $"NativeName for SystemLanguageCodePoco {poco.LanguageID} cannot be null or empty"));
+                    exceptions.Add(new ValidationException(1002, $"NativeName for SystemLanguageCode {poco.LanguageID} cannot be null or empty"));
             }
 
             if (exceptions.Count > 0)

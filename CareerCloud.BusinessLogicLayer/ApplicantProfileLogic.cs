@@ -40,9 +40,9 @@ namespace CareerCloud.BusinessLogicLayer
             foreach (var poco in pocos)
             {
                 if (poco.CurrentSalary <0)
-                    exceptions.Add(new ValidationException(111, $"CurrentSalary for ApplicantProfile {poco.CurrentSalary} cannot be negative"));
+                    exceptions.Add(new ValidationException(111, $"CurrentSalary for ApplicantProfile {poco.Id} cannot be negative"));
                 if (poco.CurrentRate <0)
-                    exceptions.Add(new ValidationException(112, $"CurrentRate for ApplicantProfile {poco.CurrentRate} cannot be negative"));
+                    exceptions.Add(new ValidationException(112, $"CurrentRate for ApplicantProfile {poco.Id} cannot be negative"));
             }
 
             if (exceptions.Count > 0)
