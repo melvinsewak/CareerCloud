@@ -51,21 +51,21 @@ namespace CareerCloud.BusinessLogicLayer
                     string[] phoneComponents = poco.ContactPhone.Split('-');
                     if (phoneComponents.Length != 3)
                     {
-                        exceptions.Add(new ValidationException(601, $"PhoneNumber for CompanyProfile {poco.Id} is not in the required format."));
+                        exceptions.Add(new ValidationException(601, $"ContactPhone for CompanyProfile {poco.Id} is not in the required format."));
                     }
                     else
                     {
                         if (phoneComponents[0].Length != 3)
                         {
-                            exceptions.Add(new ValidationException(601, $"PhoneNumber for CompanyProfile {poco.Id} is not in the required format."));
+                            exceptions.Add(new ValidationException(601, $"ContactPhone for CompanyProfile {poco.Id} is not in the required format."));
                         }
                         else if (phoneComponents[1].Length != 3)
                         {
-                            exceptions.Add(new ValidationException(601, $"PhoneNumber for CompanyProfile {poco.Id} is not in the required format."));
+                            exceptions.Add(new ValidationException(601, $"ContactPhone for CompanyProfile {poco.Id} is not in the required format."));
                         }
                         else if (phoneComponents[2].Length != 4)
                         {
-                            exceptions.Add(new ValidationException(601, $"PhoneNumber for CompanyProfile {poco.Id} is not in the required format."));
+                            exceptions.Add(new ValidationException(601, $"ContactPhone for CompanyProfile {poco.Id} is not in the required format."));
                         }
                     }
                 }
