@@ -20,6 +20,11 @@ namespace CareerCloud.Pocos
         public string CompanyDescription { get; set; }
 
         [Column("Time_Stamp")]
+        [Timestamp]
         public byte[] TimeStamp { get; set; }
+
+        //FK Relationship
+        public virtual CompanyProfilePoco CompanyProfiles { get; set; }
+        public virtual SystemLanguageCodePoco SystemLanguageCodes { get; set; }
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8FCF1B4C-534A-45FD-BDE7-E65AA3E6AA89}</ProjectGuid>
+    <ProjectGuid>{8018AEBA-4C45-4250-82AA-04EB0B3E3774}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CareerCloud.ADODataAccessLayer</RootNamespace>
-    <AssemblyName>CareerCloud.ADODataAccessLayer</AssemblyName>
+    <RootNamespace>CareerCloud.EntityFrameworkDataAccess</RootNamespace>
+    <AssemblyName>CareerCloud.EntityFrameworkDataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,8 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,34 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicantEducationRepository.cs" />
-    <Compile Include="ApplicantJobApplicationRepository.cs" />
-    <Compile Include="ApplicantProfileRepository.cs" />
-    <Compile Include="ApplicantResumeRepository.cs" />
-    <Compile Include="ApplicantSkillRepository.cs" />
-    <Compile Include="ApplicantWorkHistoryRepository.cs" />
-    <Compile Include="CompanyDescriptionRepository.cs" />
-    <Compile Include="CompanyJobDescriptionRepository.cs" />
-    <Compile Include="CompanyJobEducationRepository.cs" />
-    <Compile Include="CompanyJobRepository.cs" />
-    <Compile Include="CompanyJobSkillRepository.cs" />
-    <Compile Include="CompanyLocationRepository.cs" />
-    <Compile Include="CompanyProfileRepository.cs" />
+    <Compile Include="CareerCloudContext.cs" />
+    <Compile Include="EFGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecurityLoginRepository.cs" />
-    <Compile Include="SecurityLoginsLogRepository.cs" />
-    <Compile Include="SecurityLoginsRoleRepository.cs" />
-    <Compile Include="SecurityRoleRepository.cs" />
-    <Compile Include="SystemCountryCodeRepository.cs" />
-    <Compile Include="SystemLanguageCodeRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CareerCloud.DataAccessLayer\CareerCloud.DataAccessLayer.csproj">
-      <Project>{786dcd9f-09af-4144-81fd-4f08fc56c003}</Project>
+      <Project>{786DCD9F-09AF-4144-81FD-4F08FC56C003}</Project>
       <Name>CareerCloud.DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\CareerCloud.Pocos\CareerCloud.Pocos.csproj">
-      <Project>{b2060619-eac8-4ab7-be67-3c5e8d8e4aff}</Project>
+      <Project>{B2060619-EAC8-4AB7-BE67-3C5E8D8E4AFF}</Project>
       <Name>CareerCloud.Pocos</Name>
     </ProjectReference>
   </ItemGroup>

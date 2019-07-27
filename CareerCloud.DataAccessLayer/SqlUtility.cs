@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CareerCloud.ADODataAccessLayer
+namespace CareerCloud.DataAccessLayer
 {
     public class SqlUtility
     {
-        public static string ConnectionString { get;} = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+        public static string ConnectionString { get; } = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
     }
 }
