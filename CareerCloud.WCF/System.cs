@@ -38,28 +38,16 @@ namespace CareerCloud.WCF
 
         public SystemCountryCodePoco GetSingleSystemCountryCode(string Id)
         {
-            SystemCountryCodeLogic logic = new SystemCountryCodeLogic(new EFGenericRepository<SystemCountryCodePoco>(false));
+            var logic = new SystemCountryCodeLogic(new EFGenericRepository<SystemCountryCodePoco>(false));
 
             return logic.Get(Id);
         }
 
         public SystemLanguageCodePoco GetSingleSystemLanguageCode(string Id)
         {
-            SystemLanguageCodeLogic logic = new SystemLanguageCodeLogic(new EFGenericRepository<SystemLanguageCodePoco>(false));
+            var logic = new SystemLanguageCodeLogic(new EFGenericRepository<SystemLanguageCodePoco>(false));
 
             return logic.Get(Id);
-        }
-
-        public void RemoveSystemCountryCode(SystemCountryCodePoco[] items)
-        {
-            var logic = new SystemCountryCodeLogic(new EFGenericRepository<SystemCountryCodePoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveSystemLanguageCode(SystemLanguageCodePoco[] items)
-        {
-            var logic = new SystemLanguageCodeLogic(new EFGenericRepository<SystemLanguageCodePoco>());
-            logic.Delete(items);
         }
 
         public void UpdateSystemCountryCode(SystemCountryCodePoco[] items)
@@ -75,5 +63,19 @@ namespace CareerCloud.WCF
 
             logic.Update(items);
         }
+
+        public void RemoveSystemCountryCode(SystemCountryCodePoco[] items)
+        {
+            var logic = new SystemCountryCodeLogic(new EFGenericRepository<SystemCountryCodePoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveSystemLanguageCode(SystemLanguageCodePoco[] items)
+        {
+            var logic = new SystemLanguageCodeLogic(new EFGenericRepository<SystemLanguageCodePoco>());
+            logic.Delete(items);
+        }
+
+      
     }
 }

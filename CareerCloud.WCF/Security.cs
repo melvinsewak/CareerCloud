@@ -66,54 +66,30 @@ namespace CareerCloud.WCF
 
         public SecurityLoginPoco GetSingleSecurityLogin(string Id)
         {
-            SecurityLoginLogic logic = new SecurityLoginLogic(new EFGenericRepository<SecurityLoginPoco>(false));
+            var logic = new SecurityLoginLogic(new EFGenericRepository<SecurityLoginPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public SecurityLoginsLogPoco GetSingleSecurityLoginsLog(string Id)
         {
-            SecurityLoginsLogLogic logic = new SecurityLoginsLogLogic(new EFGenericRepository<SecurityLoginsLogPoco>(false));
+            var logic = new SecurityLoginsLogLogic(new EFGenericRepository<SecurityLoginsLogPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public SecurityLoginsRolePoco GetSingleSecurityLoginsRole(string Id)
         {
-            SecurityLoginsRoleLogic logic = new SecurityLoginsRoleLogic(new EFGenericRepository<SecurityLoginsRolePoco>(false));
+            var logic = new SecurityLoginsRoleLogic(new EFGenericRepository<SecurityLoginsRolePoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public SecurityRolePoco GetSingleSecurityRole(string Id)
         {
-            SecurityRoleLogic logic = new SecurityRoleLogic(new EFGenericRepository<SecurityRolePoco>(false));
+            var logic = new SecurityRoleLogic(new EFGenericRepository<SecurityRolePoco>(false));
 
             return logic.Get(Guid.Parse(Id));
-        }
-
-        public void RemoveSecurityLogin(SecurityLoginPoco[] items)
-        {
-            var logic = new SecurityLoginLogic(new EFGenericRepository<SecurityLoginPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveSecurityLoginsLog(SecurityLoginsLogPoco[] items)
-        {
-            var logic = new SecurityLoginsLogLogic(new EFGenericRepository<SecurityLoginsLogPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveSecurityLoginsRole(SecurityLoginsRolePoco[] items)
-        {
-            var logic = new SecurityLoginsRoleLogic(new EFGenericRepository<SecurityLoginsRolePoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveSecurityRole(SecurityRolePoco[] items)
-        {
-            var logic = new SecurityRoleLogic(new EFGenericRepository<SecurityRolePoco>());
-            logic.Delete(items);
         }
 
         public void UpdateSecurityLogin(SecurityLoginPoco[] items)
@@ -143,5 +119,31 @@ namespace CareerCloud.WCF
 
             logic.Update(items);
         }
+
+        public void RemoveSecurityLogin(SecurityLoginPoco[] items)
+        {
+            var logic = new SecurityLoginLogic(new EFGenericRepository<SecurityLoginPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveSecurityLoginsLog(SecurityLoginsLogPoco[] items)
+        {
+            var logic = new SecurityLoginsLogLogic(new EFGenericRepository<SecurityLoginsLogPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveSecurityLoginsRole(SecurityLoginsRolePoco[] items)
+        {
+            var logic = new SecurityLoginsRoleLogic(new EFGenericRepository<SecurityLoginsRolePoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveSecurityRole(SecurityRolePoco[] items)
+        {
+            var logic = new SecurityRoleLogic(new EFGenericRepository<SecurityRolePoco>());
+            logic.Delete(items);
+        }
+
+
     }
 }

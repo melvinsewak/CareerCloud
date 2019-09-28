@@ -11,7 +11,6 @@ namespace CareerCloud.WCF
     [ServiceContract]
     public interface ISystem
     {
-        //------------------------------------SystemCountryCode----------
         [OperationContract]
         void AddSystemCountryCode(SystemCountryCodePoco[] items);
         [OperationContract]
@@ -22,8 +21,6 @@ namespace CareerCloud.WCF
         SystemCountryCodePoco GetSingleSystemCountryCode(string Id);
         [OperationContract]
         List<SystemCountryCodePoco> GetAllSystemCountryCode();
-
-        //------------------------------------SystemLanguageCode----------
         [OperationContract]
         void AddSystemLanguageCode(SystemLanguageCodePoco[] items);
         [OperationContract]

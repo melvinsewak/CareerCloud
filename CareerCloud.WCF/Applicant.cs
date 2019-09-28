@@ -15,13 +15,6 @@ namespace CareerCloud.WCF
         {
             var logic = new ApplicantEducationLogic(new EFGenericRepository<ApplicantEducationPoco>());
 
-             logic.Add(items);
-        }
-
-        public void AddApplicantJobApplication(ApplicantJobApplicationPoco[] items)
-        {
-            var logic = new ApplicantJobApplicationLogic(new EFGenericRepository<ApplicantJobApplicationPoco>());
-
             logic.Add(items);
         }
 
@@ -39,12 +32,25 @@ namespace CareerCloud.WCF
             logic.Add(items);
         }
 
+        public void AddApplicantJobApplication(ApplicantJobApplicationPoco[] items)
+        {
+            var logic = new ApplicantJobApplicationLogic(new EFGenericRepository<ApplicantJobApplicationPoco>());
+
+            logic.Add(items);
+        }
+
+
+
         public void AddApplicantSkill(ApplicantSkillPoco[] items)
         {
             var logic = new ApplicantSkillLogic(new EFGenericRepository<ApplicantSkillPoco>());
 
             logic.Add(items);
         }
+
+
+
+
 
         public void AddApplicantWorkHistory(ApplicantWorkHistoryPoco[] items)
         {
@@ -59,14 +65,6 @@ namespace CareerCloud.WCF
 
             return logic.GetAll();
         }
-
-        public List<ApplicantJobApplicationPoco> GetAllApplicantJobApplication()
-        {
-            var logic = new ApplicantJobApplicationLogic(new EFGenericRepository<ApplicantJobApplicationPoco>(false));
-
-            return logic.GetAll();
-        }
-
         public List<ApplicantProfilePoco> GetAllApplicantProfile()
         {
             var logic = new ApplicantProfileLogic(new EFGenericRepository<ApplicantProfilePoco>(false));
@@ -80,6 +78,18 @@ namespace CareerCloud.WCF
 
             return logic.GetAll();
         }
+        public List<ApplicantJobApplicationPoco> GetAllApplicantJobApplication()
+        {
+            var logic = new ApplicantJobApplicationLogic(new EFGenericRepository<ApplicantJobApplicationPoco>(false));
+
+            return logic.GetAll();
+        }
+
+
+
+
+
+
 
         public List<ApplicantSkillPoco> GetAllApplicantSkill()
         {
@@ -97,42 +107,48 @@ namespace CareerCloud.WCF
 
         public ApplicantEducationPoco GetSingleApplicantEducation(string Id)
         {
-            ApplicantEducationLogic logic = new ApplicantEducationLogic(new EFGenericRepository<ApplicantEducationPoco>(false));
+            var logic = new ApplicantEducationLogic(new EFGenericRepository<ApplicantEducationPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public ApplicantJobApplicationPoco GetSingleApplicantJobApplication(string Id)
         {
-            ApplicantJobApplicationLogic logic = new ApplicantJobApplicationLogic(new EFGenericRepository<ApplicantJobApplicationPoco>(false));
+            var logic = new ApplicantJobApplicationLogic(new EFGenericRepository<ApplicantJobApplicationPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public ApplicantProfilePoco GetSingleApplicantProfile(string Id)
         {
-            ApplicantProfileLogic logic = new ApplicantProfileLogic(new EFGenericRepository<ApplicantProfilePoco>(false));
+            var logic = new ApplicantProfileLogic(new EFGenericRepository<ApplicantProfilePoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
+
+
+
         public ApplicantResumePoco GetSingleApplicantResume(string Id)
         {
-            ApplicantResumeLogic logic = new ApplicantResumeLogic(new EFGenericRepository<ApplicantResumePoco>(false));
+            var logic = new ApplicantResumeLogic(new EFGenericRepository<ApplicantResumePoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public ApplicantSkillPoco GetSingleApplicantSkill(string Id)
         {
-            ApplicantSkillLogic logic = new ApplicantSkillLogic(new EFGenericRepository<ApplicantSkillPoco>(false));
+            var logic = new ApplicantSkillLogic(new EFGenericRepository<ApplicantSkillPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
+
+
+
         public ApplicantWorkHistoryPoco GetSingleApplicantWorkHistory(string Id)
         {
-            ApplicantWorkHistoryLogic logic = new ApplicantWorkHistoryLogic(new EFGenericRepository<ApplicantWorkHistoryPoco>(false));
+            var logic = new ApplicantWorkHistoryLogic(new EFGenericRepository<ApplicantWorkHistoryPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
@@ -154,6 +170,9 @@ namespace CareerCloud.WCF
             var logic = new ApplicantProfileLogic(new EFGenericRepository<ApplicantProfilePoco>());
             logic.Delete(items);
         }
+
+
+
 
         public void RemoveApplicantResume(ApplicantResumePoco[] items)
         {
@@ -197,7 +216,6 @@ namespace CareerCloud.WCF
         public void UpdateApplicantResume(ApplicantResumePoco[] items)
         {
             var logic = new ApplicantResumeLogic(new EFGenericRepository<ApplicantResumePoco>());
-
             logic.Update(items);
         }
 
@@ -207,6 +225,8 @@ namespace CareerCloud.WCF
 
             logic.Update(items);
         }
+
+
 
         public void UpdateApplicantWorkHistory(ApplicantWorkHistoryPoco[] items)
         {

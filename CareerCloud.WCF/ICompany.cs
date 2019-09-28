@@ -11,7 +11,7 @@ namespace CareerCloud.WCF
     [ServiceContract]
     public interface ICompany
     {
-        //------------------------------------CompanyDescription----------
+
         [OperationContract]
         void AddCompanyDescription(CompanyDescriptionPoco[] items);
         [OperationContract]
@@ -22,8 +22,6 @@ namespace CareerCloud.WCF
         CompanyDescriptionPoco GetSingleCompanyDescription(string Id);
         [OperationContract]
         List<CompanyDescriptionPoco> GetAllCompanyDescription();
-
-        //------------------------------------CompanyJobEducation----------
         [OperationContract]
         void AddCompanyJobEducation(CompanyJobEducationPoco[] items);
         [OperationContract]
@@ -34,8 +32,6 @@ namespace CareerCloud.WCF
         CompanyJobEducationPoco GetSingleCompanyJobEducation(string Id);
         [OperationContract]
         List<CompanyJobEducationPoco> GetAllCompanyJobEducation();
-
-        //------------------------------------CompanyJobSkill----------
         [OperationContract]
         void AddCompanyJobSkill(CompanyJobSkillPoco[] items);
         [OperationContract]
@@ -46,8 +42,6 @@ namespace CareerCloud.WCF
         CompanyJobSkillPoco GetSingleCompanyJobSkill(string Id);
         [OperationContract]
         List<CompanyJobSkillPoco> GetAllCompanyJobSkill();
-
-        //------------------------------------CompanyJob----------
         [OperationContract]
         void AddCompanyJob(CompanyJobPoco[] items);
         [OperationContract]
@@ -58,9 +52,6 @@ namespace CareerCloud.WCF
         CompanyJobPoco GetSingleCompanyJob(string Id);
         [OperationContract]
         List<CompanyJobPoco> GetAllCompanyJob();
-
-
-        //------------------------------------CompanyJobDescription----------
         [OperationContract]
         void AddCompanyJobDescription(CompanyJobDescriptionPoco[] items);
         [OperationContract]
@@ -71,8 +62,6 @@ namespace CareerCloud.WCF
         CompanyJobDescriptionPoco GetSingleCompanyJobDescription(string Id);
         [OperationContract]
         List<CompanyJobDescriptionPoco> GetAllCompanyJobDescription();
-
-        //------------------------------------CompanyLocation----------
         [OperationContract]
         void AddCompanyLocation(CompanyLocationPoco[] items);
         [OperationContract]
@@ -83,8 +72,6 @@ namespace CareerCloud.WCF
         CompanyLocationPoco GetSingleCompanyLocation(string Id);
         [OperationContract]
         List<CompanyLocationPoco> GetAllCompanyLocation();
-
-        //------------------------------------CompanyProfile----------
         [OperationContract]
         void AddCompanyProfile(CompanyProfilePoco[] items);
         [OperationContract]

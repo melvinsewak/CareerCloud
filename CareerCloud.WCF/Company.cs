@@ -108,93 +108,51 @@ namespace CareerCloud.WCF
 
         public CompanyDescriptionPoco GetSingleCompanyDescription(string Id)
         {
-            CompanyDescriptionLogic logic = new CompanyDescriptionLogic(new EFGenericRepository<CompanyDescriptionPoco>(false));
+            var logic = new CompanyDescriptionLogic(new EFGenericRepository<CompanyDescriptionPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public CompanyJobPoco GetSingleCompanyJob(string Id)
         {
-            CompanyJobLogic logic = new CompanyJobLogic(new EFGenericRepository<CompanyJobPoco>(false));
+            var logic = new CompanyJobLogic(new EFGenericRepository<CompanyJobPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public CompanyJobDescriptionPoco GetSingleCompanyJobDescription(string Id)
         {
-            CompanyJobDescriptionLogic logic = new CompanyJobDescriptionLogic(new EFGenericRepository<CompanyJobDescriptionPoco>(false));
+            var logic = new CompanyJobDescriptionLogic(new EFGenericRepository<CompanyJobDescriptionPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public CompanyJobEducationPoco GetSingleCompanyJobEducation(string Id)
         {
-            CompanyJobEducationLogic logic = new CompanyJobEducationLogic(new EFGenericRepository<CompanyJobEducationPoco>(false));
+            var logic = new CompanyJobEducationLogic(new EFGenericRepository<CompanyJobEducationPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public CompanyJobSkillPoco GetSingleCompanyJobSkill(string Id)
         {
-            CompanyJobSkillLogic logic = new CompanyJobSkillLogic(new EFGenericRepository<CompanyJobSkillPoco>(false));
+            var logic = new CompanyJobSkillLogic(new EFGenericRepository<CompanyJobSkillPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public CompanyLocationPoco GetSingleCompanyLocation(string Id)
         {
-            CompanyLocationLogic logic = new CompanyLocationLogic(new EFGenericRepository<CompanyLocationPoco>(false));
+            var logic = new CompanyLocationLogic(new EFGenericRepository<CompanyLocationPoco>(false));
 
             return logic.Get(Guid.Parse(Id));
         }
 
         public CompanyProfilePoco GetSingleCompanyProfile(string Id)
         {
-            CompanyProfileLogic logic = new CompanyProfileLogic(new EFGenericRepository<CompanyProfilePoco>(false));
+            var logic = new CompanyProfileLogic(new EFGenericRepository<CompanyProfilePoco>(false));
 
             return logic.Get(Guid.Parse(Id));
-        }
-
-        public void RemoveCompanyDescription(CompanyDescriptionPoco[] items)
-        {
-            var logic = new CompanyDescriptionLogic(new EFGenericRepository<CompanyDescriptionPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveCompanyJob(CompanyJobPoco[] items)
-        {
-            var logic = new CompanyJobLogic(new EFGenericRepository<CompanyJobPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveCompanyJobDescription(CompanyJobDescriptionPoco[] items)
-        {
-            var logic = new CompanyJobDescriptionLogic(new EFGenericRepository<CompanyJobDescriptionPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveCompanyJobEducation(CompanyJobEducationPoco[] items)
-        {
-            var logic = new CompanyJobEducationLogic(new EFGenericRepository<CompanyJobEducationPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveCompanyJobSkill(CompanyJobSkillPoco[] items)
-        {
-            var logic = new CompanyJobSkillLogic(new EFGenericRepository<CompanyJobSkillPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveCompanyLocation(CompanyLocationPoco[] items)
-        {
-            var logic = new CompanyLocationLogic(new EFGenericRepository<CompanyLocationPoco>());
-            logic.Delete(items);
-        }
-
-        public void RemoveCompanyProfile(CompanyProfilePoco[] items)
-        {
-            var logic = new CompanyProfileLogic(new EFGenericRepository<CompanyProfilePoco>());
-            logic.Delete(items);
         }
 
         public void UpdateCompanyDescription(CompanyDescriptionPoco[] items)
@@ -245,5 +203,49 @@ namespace CareerCloud.WCF
 
             logic.Update(items);
         }
+
+        public void RemoveCompanyDescription(CompanyDescriptionPoco[] items)
+        {
+            var logic = new CompanyDescriptionLogic(new EFGenericRepository<CompanyDescriptionPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveCompanyJob(CompanyJobPoco[] items)
+        {
+            var logic = new CompanyJobLogic(new EFGenericRepository<CompanyJobPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveCompanyJobDescription(CompanyJobDescriptionPoco[] items)
+        {
+            var logic = new CompanyJobDescriptionLogic(new EFGenericRepository<CompanyJobDescriptionPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveCompanyJobEducation(CompanyJobEducationPoco[] items)
+        {
+            var logic = new CompanyJobEducationLogic(new EFGenericRepository<CompanyJobEducationPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveCompanyJobSkill(CompanyJobSkillPoco[] items)
+        {
+            var logic = new CompanyJobSkillLogic(new EFGenericRepository<CompanyJobSkillPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveCompanyLocation(CompanyLocationPoco[] items)
+        {
+            var logic = new CompanyLocationLogic(new EFGenericRepository<CompanyLocationPoco>());
+            logic.Delete(items);
+        }
+
+        public void RemoveCompanyProfile(CompanyProfilePoco[] items)
+        {
+            var logic = new CompanyProfileLogic(new EFGenericRepository<CompanyProfilePoco>());
+            logic.Delete(items);
+        }
+
+
     }
 }

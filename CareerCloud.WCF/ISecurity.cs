@@ -11,7 +11,6 @@ namespace CareerCloud.WCF
     [ServiceContract]
     public interface ISecurity
     {
-        //------------------------------------SecurityLogin----------
         [OperationContract]
         void AddSecurityLogin(SecurityLoginPoco[] items);
         [OperationContract]
@@ -22,8 +21,6 @@ namespace CareerCloud.WCF
         SecurityLoginPoco GetSingleSecurityLogin(string Id);
         [OperationContract]
         List<SecurityLoginPoco> GetAllSecurityLogin();
-        
-        //------------------------------------SecurityLoginsLog----------
         [OperationContract]
         void AddSecurityLoginsLog(SecurityLoginsLogPoco[] items);
         [OperationContract]
@@ -34,8 +31,6 @@ namespace CareerCloud.WCF
         SecurityLoginsLogPoco GetSingleSecurityLoginsLog(string Id);
         [OperationContract]
         List<SecurityLoginsLogPoco> GetAllSecurityLoginsLog();
-
-        //------------------------------------SecurityLoginsRole----------
         [OperationContract]
         void AddSecurityLoginsRole(SecurityLoginsRolePoco[] items);
         [OperationContract]
@@ -46,8 +41,6 @@ namespace CareerCloud.WCF
         SecurityLoginsRolePoco GetSingleSecurityLoginsRole(string Id);
         [OperationContract]
         List<SecurityLoginsRolePoco> GetAllSecurityLoginsRole();
-
-        //------------------------------------SecurityRole----------
         [OperationContract]
         void AddSecurityRole(SecurityRolePoco[] items);
         [OperationContract]
