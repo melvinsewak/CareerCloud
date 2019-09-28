@@ -32,9 +32,10 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public DbSet<SystemLanguageCodePoco> SystemLanguageCodes { get; set; }
 
 
-        public CareerCloudContext():base(SqlUtility.ConnectionString)
+        public CareerCloudContext(bool createProxy = true) :base(SqlUtility.ConnectionString)
         {
-
+            Configuration.ProxyCreationEnabled = createProxy;
+            Database.Log = Console.WriteLine;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
