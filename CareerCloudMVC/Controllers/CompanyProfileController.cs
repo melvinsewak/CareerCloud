@@ -28,7 +28,7 @@ namespace CareerCloudMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CompanyProfilePoco companyProfilePoco = db.CompanyProfiles.Find(id);
+            CompanyProfilePoco companyProfilePoco = db.CompanyProfiles.Include(cp => cp.CompanyDescriptions).Include(cp => cp.CompanyJobs).Include(cp => cp.CompanyLocations).FirstOrDefault(cp=>cp.Id==id);
             if (companyProfilePoco == null)
             {
                 return HttpNotFound();

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompanyDescriptionController.cs" />
+    <Compile Include="Controllers\CompanyJobController.cs" />
     <Compile Include="Controllers\CompanyLocationController.cs" />
     <Compile Include="Controllers\CompanyProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -188,6 +189,14 @@
     <Content Include="Views\CompanyDescription\Details.cshtml" />
     <Content Include="Views\CompanyDescription\Edit.cshtml" />
     <Content Include="Views\CompanyDescription\Index.cshtml" />
+    <Content Include="Views\CompanyProfile\_CompanyDescriptions.cshtml" />
+    <Content Include="Views\CompanyProfile\_CompanyJobs.cshtml" />
+    <Content Include="Views\CompanyProfile\_CompanyLocations.cshtml" />
+    <Content Include="Views\CompanyJob\Create.cshtml" />
+    <Content Include="Views\CompanyJob\Delete.cshtml" />
+    <Content Include="Views\CompanyJob\Details.cshtml" />
+    <Content Include="Views\CompanyJob\Edit.cshtml" />
+    <Content Include="Views\CompanyJob\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

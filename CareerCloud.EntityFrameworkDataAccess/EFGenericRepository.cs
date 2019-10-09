@@ -13,6 +13,10 @@ namespace CareerCloud.EntityFrameworkDataAccess
     {
         private readonly CareerCloudContext _context;
 
+        public EFGenericRepository():this(false)
+        {
+            
+        }
         public EFGenericRepository(bool createProxy = true)
         {
             _context = new CareerCloudContext(createProxy);

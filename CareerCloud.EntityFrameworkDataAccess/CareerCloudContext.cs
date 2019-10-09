@@ -31,11 +31,16 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public DbSet<SystemCountryCodePoco> SystemCountryCodes { get; set; }
         public DbSet<SystemLanguageCodePoco> SystemLanguageCodes { get; set; }
 
+        public CareerCloudContext() : this(false)
+        {
+            
+        }
 
         public CareerCloudContext(bool createProxy = true) :base(SqlUtility.ConnectionString)
         {
             Configuration.ProxyCreationEnabled = createProxy;
             Database.Log = Console.WriteLine;
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

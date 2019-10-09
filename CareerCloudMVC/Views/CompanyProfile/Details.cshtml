@@ -59,6 +59,9 @@
         </dd>
 
     </dl>
+    @Html.Partial("_CompanyLocations",Model.CompanyLocations.ToList())
+    @Html.Partial("_CompanyDescriptions",Model.CompanyDescriptions.ToList())
+    @Html.Partial("_CompanyJobs",Model.CompanyJobs.ToList())
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
